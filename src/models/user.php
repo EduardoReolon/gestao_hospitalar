@@ -1,12 +1,10 @@
 <?php
 require_once('config/entity.php');
 require_once __DIR__ . '/cargo.php';
-require_once __DIR__ . '/especialidade.php';
 
 class User extends Entity {
     protected static $table = 'user';
     public Cargo $cargo;
-    public Especialidade $especialidade;
 
     /**
      * @column
@@ -25,25 +23,14 @@ class User extends Entity {
      * log_only_prop_name
      */
     protected $password;
-    /**
-     * @column
-     * @var string
-     */
-    public $name;
+    /** @column */
+    public string $nome;
+    /** @column */
+    public DateTime $data_nascimento;
     /** @column */
     public ?int $id_cargo;
     /** @column */
-    public ?int $id_especialidade;
-    /**
-     * @column
-     * @var string
-     */
-    public $surname;
-    /**
-     * @column
-     * @var bool
-     */
-    public $active;
+    public bool $active;
     /**
      * @var string[] | null
      * @column
@@ -70,11 +57,5 @@ class User extends Entity {
         if (isset($this->cargo)) return;
         if (!isset($this->id_cargo)) return;
         $this->cargo = Cargo::findLocal($this->id_cargo);
-    }
-
-    public function loadEspecialidade() {
-        if (isset($this->especialidade)) return;
-        if (!isset($this->id_especialidade)) return;
-        $this->especialidade = Especialidade::findLocal($this->id_especialidade);
     }
 }

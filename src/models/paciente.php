@@ -12,6 +12,8 @@ class Paciente extends Entity {
     /** @column */
     public string $nome;
     /** @column */
+    public DateTime $data_nascimento;
+    /** @column */
     public string $rua;
     /** @column */
     public string $numero;

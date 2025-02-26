@@ -16,6 +16,8 @@ class Consulta extends Entity {
     /** @column */
     public int $id_especialidade;
     /** @column */
+    public bool $teleconsulta = false;
+    /** @column */
     public int $id_paciente;
     /** @column */
     public DateTime $data;
