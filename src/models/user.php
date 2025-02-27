@@ -1,6 +1,10 @@
 <?php
 require_once('config/entity.php');
 require_once __DIR__ . '/cargo.php';
+require_once __DIR__ . '/agenda.php';
+require_once __DIR__ . '/consulta.php';
+require_once __DIR__ . '/usuario_especialidade.php';
+require_once __DIR__ . '/especialidade.php';
 
 class User extends Entity {
     protected static $table = 'user';
@@ -57,5 +61,23 @@ class User extends Entity {
         if (isset($this->cargo)) return;
         if (!isset($this->id_cargo)) return;
         $this->cargo = Cargo::findLocal($this->id_cargo);
+    }
+
+    public function getAgenda(DateTime $start, DateTime $end) {
+        return Agenda::fetchSimpler([['id_usuario', '=', $this->id], ['data', '>', $start], ['data', '<', $end]]);
+    }
+
+    public function getConsultas(DateTime $start, DateTime $end) {
+        return Consulta::fetchSimpler([['id', '=', $this->id], ['data', '>', $start], ['data', '<', $end]]);
+    }
+
+    public function getEspecialidades() {
+        $usuario_especialidades = Usuario_especialidade::fetchSimpler([['id_usuario', '=', $this->id]]);
+        $ids = [];
+        foreach ($usuario_especialidades as $usuario_especialidade) {
+            $ids[] = $usuario_especialidade->id;
+        }
+
+        return Especialidade::fetchSimpler([['id', 'in', $ids]]);
     }
 }

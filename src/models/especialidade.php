@@ -45,7 +45,19 @@ class Especialidade extends Entity {
 
     public static function fetchSimpler($conditions = []): array {
         self::loadLocal();
-        
+
+        if (!empty($conditions) && !empty($conditions[0]) && $conditions[0][0] === 'id') {
+            if ($conditions[0][1] === 'in' && is_array($conditions[0][2])) {
+                $especialidades = [];
+                foreach (self::$especialidades as $especialidade) {
+                    if (in_array($especialidade->id, $conditions[0][2])) {
+                        $especialidades[] = $especialidade;
+                    }
+                }
+                return $especialidades;
+            }
+        }
+
         return self::$especialidades;
     }
 }
