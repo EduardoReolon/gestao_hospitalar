@@ -42,6 +42,15 @@ class User extends Entity {
      */
     public $roles;
 
+    public function getIdade(): int|false {
+        if (!isset($this->data_nascimento)) return false;
+
+        $dataAtual = new DateTime();
+
+        $diff = $this->data_nascimento->diff($dataAtual, true);
+        return $diff->y;
+    }
+
     public function setPassword($password) {
         $this->password = $password;
     }
