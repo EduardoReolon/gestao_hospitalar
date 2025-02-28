@@ -13,28 +13,23 @@ class User extends Entity {
     /**
      * @column
      * primary
-     * @var int
      */
-    public $id;
+    public int $id;
+    /** @column */
+    public string $username;
     /**
      * @column
-     * @var string
-     */
-    public $username;
-    /**
-     * @column
-     * @var string
      * log_only_prop_name
      */
-    protected $password;
+    protected string $password;
     /** @column */
-    public string $nome;
+    public ?string $nome;
     /** @column */
-    public DateTime $data_nascimento;
+    public ?DateTime $data_nascimento;
     /** @column */
     public ?int $id_cargo;
     /** @column */
-    public bool $active;
+    public bool $active =false;
     /**
      * @var string[] | null
      * @column

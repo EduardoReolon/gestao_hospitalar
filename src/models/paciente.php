@@ -26,13 +26,24 @@ class Paciente extends Entity {
     /** @column */
     public string $rua;
     /** @column */
-    public string $numero;
+    public ?string $numero;
+    /** @column */
+    public ?string $complemento;
     /** @column */
     public string $cep;
     /** @column */
     public string $cidade;
     /** @column */
     public string $estado;
+
+    public function getIdade(): int|false {
+        if (!isset($this->data_nascimento)) return false;
+
+        $dataAtual = new DateTime();
+
+        $diff = $this->data_nascimento->diff($dataAtual, true);
+        return $diff->y;
+    }
 
     public function loadPacienteExames() {
         if (isset($this->paciente_exames)) return;
