@@ -14,7 +14,7 @@ class Paciente_exame extends Entity {
     /** @column */
     public int $id_paciente;
     /** @column */
-    public int $id_usuario;
+    public ?int $id_usuario;
     /** @column */
     public int $id_exame;
     /** @column */

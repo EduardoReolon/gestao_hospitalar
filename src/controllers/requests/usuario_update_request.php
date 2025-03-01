@@ -2,6 +2,10 @@
 require_once __DIR__ . '/../config/base_request.php';
 
 class Usuario_update_request extends Base_request {
+    /**
+     * pattern email
+     */
+    public ?string $username;
     public ?string $nome;
     public ?string $password;
     public ?DateTime $data_nascimento;

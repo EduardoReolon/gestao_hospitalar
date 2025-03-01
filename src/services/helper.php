@@ -162,10 +162,12 @@ class Helper {
         foreach ($patterns as $pattern) {
             if (strcasecmp($pattern, 'cpf') === 0) {
                 if (preg_match('/^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}$/', $value)) return true;
-            } else if (strcasecmp($pattern, 'cnpj') === 0) {
+            } elseif (strcasecmp($pattern, 'cnpj') === 0) {
                 if (preg_match('/^[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}-?[0-9]{2}$/', $value)) return true;
-            } else if (strcasecmp($pattern, 'phone') === 0) {
+            } elseif (strcasecmp($pattern, 'phone') === 0) {
                 if (preg_match('/^(\+[0-9]{1,3} *)?\(?[0-9]{2}\)? *[0-9]{4,5}( *|-)[0-9]{4}$/', $value)) return true;
+            } elseif (strcasecmp($pattern, 'email') === 0) {
+                if (filter_var($value, FILTER_VALIDATE_EMAIL)) return true;
             }
         }
 

@@ -42,15 +42,20 @@ class Api_handler {
                 }
             }
         }
-        
+
         // Obtém a lista de arquivos PHP na pasta
         readFolder(__DIR__ . '/../controllers', $files);
-        
         // Loop pelos arquivos
         foreach ($files as $file) {
             // Inclui o arquivo
             require_once $file;
         }
+        // try {
+        // } catch (\Throwable $th) {
+        //     Log::new(Log::TYPE_EXCEPTION)->setException($th);
+        //     throw $th;
+        // }
+        
 
         // Loop pelas classes
         foreach (get_declared_classes() as $classe) {

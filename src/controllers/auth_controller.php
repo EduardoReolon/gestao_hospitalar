@@ -3,6 +3,7 @@ require_once __DIR__ . '/../services/auth.php';
 
 class Auth_controller extends Base_controller {
     static protected array $map = ['api', 'v1', 'auth'];
+    
     /**
      * @request
      * map /

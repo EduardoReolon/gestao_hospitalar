@@ -377,6 +377,8 @@ class Entity {
             try {
                 if ($keyValue->value instanceof DateTime) {
                     $statement->bindValue(":{$keyValue->col->col_name}", $keyValue->value->format('Y-m-d H:i:s'));
+                } elseif (is_bool($keyValue->value)) {
+                    $statement->bindValue(":{$keyValue->col->col_name}", $keyValue->value ? 1 : 0);
                 } else $statement->bindValue(":{$keyValue->col->col_name}", $keyValue->value);
             } catch (\Throwable $th) {}
         }

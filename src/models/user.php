@@ -9,6 +9,10 @@ require_once __DIR__ . '/especialidade.php';
 class User extends Entity {
     protected static $table = 'user';
     public Cargo $cargo;
+    /** @var Agenda[] */
+    public array $agendas;
+    /** @var Especialidade[] */
+    public array $especialidades;
 
     /**
      * @column
@@ -29,7 +33,7 @@ class User extends Entity {
     /** @column */
     public ?int $id_cargo;
     /** @column */
-    public bool $active =false;
+    public bool $active = true;
     /**
      * @var string[] | null
      * @column
@@ -67,6 +71,12 @@ class User extends Entity {
         $this->cargo = Cargo::findLocal($this->id_cargo);
     }
 
+    public function loadAgenda() {
+        if (isset($this->agendas)) return;
+
+        $this->agendas = Agenda::fetchSimpler([['id_usuario', '=', $this->id]]);
+    }
+
     public function getAgenda(DateTime $start, DateTime $end) {
         return Agenda::fetchSimpler([['id_usuario', '=', $this->id], ['data', '>', $start], ['data', '<', $end]]);
     }
@@ -75,13 +85,15 @@ class User extends Entity {
         return Consulta::fetchSimpler([['id', '=', $this->id], ['data', '>', $start], ['data', '<', $end]]);
     }
 
-    public function getEspecialidades() {
+    public function loadEspecialidades() {
+        if (isset($this->especialidades)) return;
+        
         $usuario_especialidades = Usuario_especialidade::fetchSimpler([['id_usuario', '=', $this->id]]);
         $ids = [];
         foreach ($usuario_especialidades as $usuario_especialidade) {
             $ids[] = $usuario_especialidade->id;
         }
 
-        return Especialidade::fetchSimpler([['id', 'in', $ids]]);
+        $this->especialidades = Especialidade::fetchSimpler([['id', 'in', $ids]]);
     }
 }

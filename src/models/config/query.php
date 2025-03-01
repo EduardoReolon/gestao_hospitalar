@@ -85,6 +85,8 @@ class Query {
         foreach ($this->params as $key => $param) {
             if ($param instanceof DateTime) {
                 $statement->bindValue(":{$key}", $param->format('Y-m-d H:i:s'));
+            } elseif (is_bool($param)) {
+                $statement->bindValue(":{$key}", $param ? 1 : 0);
             } else $statement->bindValue(":{$key}", $param);
         }
         $statement->execute();
