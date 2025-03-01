@@ -31,9 +31,9 @@ class Usuario_view extends View_main {
         parent::__construct();
     }
 
-    private function formAgenda(Agenda $agenda) {
+    private function formAgenda(Agenda $agenda, bool $duracao_nula = false) {
         $id_agenda = $agenda->id ?? 0;
-        $duracao_minutos = isset($agenda->id) ? null : 30;
+        $duracao_minutos = $duracao_nula ? '' : (isset($agenda->id) ? null : 30);
         ?>
             <form <?php echo isset($agenda->id) ? '' : 'refresh-page' ?> method="POST" action="<?php echo Helper::apiPath("usuario/{$this->usuario->id}/agenda/{$id_agenda}") ?>">
                 <tr>
@@ -68,6 +68,14 @@ class Usuario_view extends View_main {
             $this->formAgenda($agenda);
         }
         $this->formAgenda(new Agenda());
+        echo '</tbody></table>';
+
+        ?><h1>Testes</h1><?php
+
+        echo '<h2>Agenda</h2>';
+        echo '<table><thead><tr><th>data</th><th>duração (minutos)</th><th>descrição</th><th>cancelado</th><th>ações</th></tr></thead><tbody>';
+        // $this->formAgenda(new Agenda());
+        $this->formAgenda(new Agenda(), duracao_nula: true);
         echo '</tbody></table>';
     }
 }

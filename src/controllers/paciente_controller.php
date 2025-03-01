@@ -47,6 +47,9 @@ class Paciente_controller extends Base_controller {
         
         $id_consulta = (int) RouteParams::get('id_consulta');
 
+        $especialidade = Especialidade::findLocal($request->id_especialidade);
+        if (!isset($especialidade)) return $response->status(404);
+
         $consulta = null;
 
         if ($id_consulta === 0) {
@@ -80,6 +83,9 @@ class Paciente_controller extends Base_controller {
         if (!isset($paciente)) return $response->status(404)->sendAlert('Paciente não encontrado');
         
         $id_paciente_exame = (int) RouteParams::get('id_paciente_exame');
+
+        $exame = Exame::findLocal($request->id_exame);
+        if (!isset($exame)) return $response->status(404);
 
         $paciente_exame = null;
 

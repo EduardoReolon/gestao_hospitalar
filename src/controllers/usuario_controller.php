@@ -36,8 +36,8 @@ class Usuario_controller extends Base_controller {
 
         if ($id_usuario === 0) {
             $usuario = new User();
-            if (!isset($request->password)) $request->password = Helper::randomStr(15);
             if (!isset($request->username)) return $response->status(400)->sendAlert('É necessário informar o username');
+            if (!isset($request->password)) return $response->status(400)->sendAlert('É necessário informar a senha para criar um usuário');
             $usuario->username = $request->username;
         } else {
             $usuario = User::findBy('id', $id_usuario);

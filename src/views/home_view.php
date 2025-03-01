@@ -139,5 +139,23 @@ class Home_view extends View_main {
         }
         $this->formPaciente(new Paciente());
         echo '</tbody></table>';
+
+        ?><h1>Testes</h1><?php
+
+        echo '<h2>Usuários</h2>';
+        echo '<table><thead><tr><th></th><th>username</th><th>senha</sh><th>nome</th><th>data de nascimento</th><th>cargo</th><th>ações</th></tr></thead><tbody>';
+        $usuario = new User();
+        $usuario->username = 'não e-mail';
+        $this->formUser($usuario);
+        $usuario = new User();
+        $usuario->username = Helper::randomStr(3) . '@email.com';
+        $this->formUser($usuario);
+        echo '</tbody></table>';
+
+        echo '<h2>Pacientes</h2>';
+        echo '<table><thead><tr><th></th><th>Nome</th><th>Data de Nascimento</th><th>Rua</th><th>Número</th><th>Complemento</th><th>CEP</th><th>Cidade</th><th>Estado</th><th>Ações</th></tr></thead><tbody>';
+        $paciente = new Paciente();
+        $this->formPaciente($paciente);
+        echo '</tbody></table>';
     }
 }

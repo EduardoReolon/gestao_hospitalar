@@ -13,6 +13,7 @@ class User extends Entity {
     public array $agendas;
     /** @var Especialidade[] */
     public array $especialidades;
+    public bool $hidden = false;
 
     /**
      * @column

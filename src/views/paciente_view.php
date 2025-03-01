@@ -37,15 +37,29 @@ class Paciente_view extends View_main {
         $this->usuario = Auth::getUser();
         $this->usuarios = User::fetchSimpler();
         $this->exames = Exame::fetchSimpler();
-
         $this->especialidades = Especialidade::fetchSimpler();
+
+        $usuario_nao_cadastrado = new User();
+        $usuario_nao_cadastrado->id = 1001;
+        $usuario_nao_cadastrado->nome = 'Não cadastrado (teste)';
+        $this->usuarios[] = $usuario_nao_cadastrado;
+
+        $exame_nao_cadastrado = new Exame();
+        $exame_nao_cadastrado->id = 1001;
+        $exame_nao_cadastrado->nome = 'Não cadastrado (teste)';
+        $this->exames[] = $exame_nao_cadastrado;
+
+        $especialidade_nao_cadastrada = new Especialidade();
+        $especialidade_nao_cadastrada->id = 1001;
+        $especialidade_nao_cadastrada->nome = 'Não cadastrada (teste)';
+        $this->especialidades[] = $especialidade_nao_cadastrada;
 
         parent::__construct();
     }
 
-    private function formConsulta(Consulta $consulta) {
+    private function formConsulta(Consulta $consulta, bool $duracao_nula = false) {
         $id_consulta = $consulta->id ?? 0;
-        $duracao_minutos = isset($consulta->id) ? null : 30;
+        $duracao_minutos = $duracao_nula ? '' : (isset($consulta->id) ? null : 30);
         $usuario_cadastro = null;
         if (isset($consulta->id)) {
             foreach ($this->usuarios as $usuario) {
@@ -108,7 +122,7 @@ class Paciente_view extends View_main {
     }
 
     private function formExame(Paciente_exame $paciente_exame) {
-        $paciente_exame->loadExame();
+        // $paciente_exame->loadExame();
         $id_paciente_exame = $paciente_exame->id ?? 0;
         ?>
             <form <?php echo isset($paciente_exame->id) ? '' : 'refresh-page' ?> method="POST" action="<?php echo Helper::apiPath("paciente/{$this->paciente->id}/exame/{$id_paciente_exame}") ?>">
@@ -239,6 +253,50 @@ class Paciente_view extends View_main {
         foreach ($this->paciente->prontuarios as $prontuario) {
             $this->formProntuario($prontuario);
         }
+        $this->formProntuario(new Prontuario());
+        echo '</tbody></table>';
+
+        ?><h1>Testes</h1><?php
+        echo '<h2>Consultas</h2>';
+        echo '<table><thead></th><th>cadastro</th><th>atendimento</th><th>especialidade</th><th>teleconsulta</th><th>data</th><th>duração (minutos)</th><th>notas cadastro</th><th>notas atendimento</th><th>ações</th></tr></thead><tbody>';
+        $consulta = new Consulta();
+        $consulta->id_usuario_atendimento = 1001;
+        $this->formConsulta($consulta);
+        $consulta = new Consulta();
+        $consulta->id_especialidade = 1001;
+        $this->formConsulta($consulta);
+        $consulta = new Consulta();
+        $consulta->id_usuario_atendimento = $this->usuarios[0]->id;
+        $consulta->id_especialidade = $this->especialidades[0]->id;
+        $this->formConsulta($consulta);
+        $consulta = new Consulta();
+        $consulta->id_usuario_atendimento = $this->usuarios[0]->id;
+        $consulta->id_especialidade = $this->especialidades[0]->id;
+        $consulta->data = new DateTime();
+        $this->formConsulta($consulta, duracao_nula: true);
+        echo '</tbody></table>';
+
+        echo '<h2>Exames</h2>';
+        echo '<table><thead></th><th>atendimento</th><th>exame</th><th>data</th><th>notas</th><th>ações</th></tr></thead><tbody>';
+        $paciente_exame = new Paciente_exame();
+        $paciente_exame->id_usuario = 1001;
+        $this->formExame($paciente_exame);
+        $paciente_exame = new Paciente_exame();
+        $paciente_exame->id_exame = 1001;
+        $this->formExame($paciente_exame);
+        $paciente_exame = new Paciente_exame();
+        $paciente_exame->id_usuario = $this->usuarios[0]->id;
+        $paciente_exame->id_exame = $this->exames[0]->id;
+        $this->formExame($paciente_exame);
+        echo '</tbody></table>';
+
+        echo '<h2>Prescrições</h2>';
+        echo '<table><thead></th><th>atendimento</th><th>data</th><th>notas</th><th>ações</th></tr></thead><tbody>';
+        $this->formPrescricao(new Prescricao());
+        echo '</tbody></table>';
+
+        echo '<h2>Prontuários</h2>';
+        echo '<table><thead></th><th>atendimento</th><th>data</th><th>notas</th><th>ações</th></tr></thead><tbody>';
         $this->formProntuario(new Prontuario());
         echo '</tbody></table>';
     }
