@@ -8,7 +8,7 @@ Este projeto é um sistema de gestão hospitalar desenvolvido em PHP, seguindo o
 - JWT para autenticação
 - MySQL para banco de dados
 - Composer para gerenciar dependências
-- Apache ou Nginx (recomendado usar o XAMPP para facilitar o setup)
+- Apache (recomendado usar o XAMPP para facilitar o setup)
 
 ## Pré-requisitos
 
@@ -29,7 +29,7 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados:
 
 ## Configuração do Projeto
 
-### 1. Instalação das Dependências
+### Instalação das Dependências
 
 Clone este repositório no seu ambiente local:
 
@@ -63,7 +63,7 @@ Se você estiver usando Nginx ou outro servidor, configure o arquivo de configur
 
 1. Após configurar o banco de dados e o ambiente, inicie o servidor web (Apache ou outro).
 
-2. Acesse a aplicação pela URL configurada no seu servidor (por exemplo, `http://localhost/gestao_hospitalar`).
+2. Acesse a aplicação pela URL configurada no seu servidor (por exemplo, `http://localhost`).
 
 3. A primeira vez que acessar o sistema, utilize o usuário e senha abaixo para fazer login:
    - **Usuário**: admin@admin.com
@@ -79,8 +79,8 @@ Se você estiver usando Nginx ou outro servidor, configure o arquivo de configur
 
 # Estrutura de Pastas
 
-A estrutura de pastas do projeto segue o padrão MVC, com subpastas de configuração e classes base. Os logs são registradas em arquivos .txt dentro da pasta logs.
+A estrutura de pastas do projeto segue o padrão MVC, com subpastas de configuração e classes base.
 
 # Logs
 
-Todos os logs de requisições, erros e alterações são armazenados na pasta logs, divididos em subpastas para facilitar a organização.
+Os logs são registradas em arquivos .txt dentro da pasta logs. Todas as requisições, erros e alterações são armazenados em subpastas para facilitar a organização.
