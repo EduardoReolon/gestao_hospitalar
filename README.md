@@ -38,18 +38,18 @@ git clone https://github.com/EduardoReolon/gestao_hospitalar.git
 cd gestao_hospitalar
 ```
 
-# Instale as dependências usando o Composer
+#### Instale as dependências usando o Composer
 composer install
 
-# Arquivo de Configuração
+### Arquivo de Configuração
 
 Crie um arquivo chamado config.php na raiz do projeto com base no arquivo config.php.model que se encontra no repositório. Esse arquivo contém as configurações do banco de dados e outras configurações do sistema.
 
-# Banco de Dados
+### Banco de Dados
 
 O projeto utiliza MySQL para armazenar dados. Na raiz do repositório, você encontrará o arquivo script-mysql.sql. Execute este script no seu banco de dados para criar a estrutura necessária
 
-# Configuração do .htaccess
+### Configuração do .htaccess
 
 O arquivo .htaccess está incluído no projeto para permitir o roteamento adequado de URLs e garantir a segurança das rotas. Se você estiver usando Apache, certifique-se de que o módulo mod_rewrite está ativado. Para habilitar o mod_rewrite, edite o arquivo de configuração do Apache (httpd.conf) e descomente a linha:
 
@@ -59,11 +59,11 @@ LoadModule rewrite_module modules/mod_rewrite.so
 
 Se você estiver usando Nginx ou outro servidor, configure o arquivo de configuração para permitir o roteamento adequado de URLs conforme a necessidade.
 
-# Primeira Execução
+## Primeira Execução
 
 1. Após configurar o banco de dados e o ambiente, inicie o servidor web (Apache ou outro).
 
-2. Acesse a aplicação pela URL configurada no seu servidor (por exemplo, `http://localhost`).
+2. Acesse a aplicação pela URL configurada no seu servidor (por exemplo, `http://localhost/gestao_hospitalar`).
 
 3. A primeira vez que acessar o sistema, utilize o usuário e senha abaixo para fazer login:
    - **Usuário**: admin@admin.com
@@ -71,16 +71,16 @@ Se você estiver usando Nginx ou outro servidor, configure o arquivo de configur
 
    Esse usuário será criado automaticamente na primeira execução, facilitando o teste.
 
-# Como Testar
+## Como Testar
 
 1. Após fazer login, você pode acessar as funcionalidades do sistema, como cadastro de pacientes, profissionais de saúde, e muito mais.
 
-2. Para testar a autenticação, o sistema utiliza um token JWT com validade de 15 minutos. Após esse tempo, você precisará gerar um novo token de autenticação.
+2. Todas as páginas possuem ao final um conjunto de testes já pré configurados, para facilitar a observação dos erros gerados.
 
 # Estrutura de Pastas
 
-A estrutura de pastas do projeto segue o padrão MVC, com subpastas de configuração e classes base. As rotas e logs de erro são registradas em arquivos .txt dentro da pasta logs.
+A estrutura de pastas do projeto segue o padrão MVC, com subpastas de configuração e classes base. Os logs são registradas em arquivos .txt dentro da pasta logs.
 
 # Logs
 
-Todos os logs de requisições e erros são armazenados na pasta logs, divididos em subpastas para facilitar a organização.
+Todos os logs de requisições, erros e alterações são armazenados na pasta logs, divididos em subpastas para facilitar a organização.
