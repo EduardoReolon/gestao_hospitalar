@@ -44,6 +44,7 @@ class Usuario_controller extends Base_controller {
             if (!isset($usuario)) return $response->status(404);
         }
 
+        if (isset($request->cpf)) $usuario->cpf = $request->cpf;
         if (isset($request->nome)) $usuario->nome = $request->nome;
         if (isset($request->password)) $usuario->setPassword($request->password);
         if (isset($request->data_nascimento)) $usuario->data_nascimento = $request->data_nascimento;

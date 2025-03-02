@@ -30,6 +30,8 @@ class User extends Entity {
     /** @column */
     public ?string $nome;
     /** @column */
+    public ?string $cpf;
+    /** @column */
     public ?DateTime $data_nascimento;
     /** @column */
     public ?int $id_cargo;

@@ -55,6 +55,9 @@ class Home_view extends View_main {
                         <input name="nome" class="form-control" type='text' value="<?php echo $usuario->nome ?? ''; ?>"/>
                     </td>
                     <td>
+                        <input name="cpf" class="form-control" type='text' value="<?php echo $usuario->cpf ?? ''; ?>"/>
+                    </td>
+                    <td>
                         <input name="data_nascimento" class="form-control" type='date' value="<?php echo isset($usuario->data_nascimento) ? $usuario->data_nascimento->format('Y-m-d') : ''; ?>"/>
                     </td>
                     <td>
@@ -93,6 +96,9 @@ class Home_view extends View_main {
                         <input name="nome" class="form-control" type='text' value="<?php echo $paciente->nome ?? ''; ?>"/>
                     </td>
                     <td>
+                        <input name="cpf" class="form-control" type='text' value="<?php echo $paciente->cpf ?? ''; ?>"/>
+                    </td>
+                    <td>
                         <input name="data_nascimento" class="form-control" type='date' value="<?php echo isset($paciente->data_nascimento) ? $paciente->data_nascimento->format('Y-m-d') : ''; ?>"/>
                     </td>
                     <td>
@@ -125,7 +131,7 @@ class Home_view extends View_main {
         ?><h1>Sistema hospitalar</h1><?php
 
         echo '<h2>Usuários</h2>';
-        echo '<table><thead><tr><th></th><th>username</th><th>senha</sh><th>nome</th><th>data de nascimento</th><th>cargo</th><th>ações</th></tr></thead><tbody>';
+        echo '<table><thead><tr><th></th><th>username</th><th>senha</sh><th>nome</th><th>CPF</th><th>data de nascimento</th><th>cargo</th><th>ações</th></tr></thead><tbody>';
         foreach ($this->usuarios as $usuario) {
             $this->formUser($usuario);
         }
@@ -133,7 +139,7 @@ class Home_view extends View_main {
         echo '</tbody></table>';
 
         echo '<h2>Pacientes</h2>';
-        echo '<table><thead><tr><th></th><th>Nome</th><th>Data de Nascimento</th><th>Rua</th><th>Número</th><th>Complemento</th><th>CEP</th><th>Cidade</th><th>Estado</th><th>Ações</th></tr></thead><tbody>';
+        echo '<table><thead><tr><th></th><th>Nome</th><th>CPF</th><th>Data de Nascimento</th><th>Rua</th><th>Número</th><th>Complemento</th><th>CEP</th><th>Cidade</th><th>Estado</th><th>Ações</th></tr></thead><tbody>';
         foreach ($this->pacientes as $paciente) {
             $this->formPaciente($paciente);
         }
@@ -143,18 +149,32 @@ class Home_view extends View_main {
         ?><h1>Testes</h1><?php
 
         echo '<h2>Usuários</h2>';
-        echo '<table><thead><tr><th></th><th>username</th><th>senha</sh><th>nome</th><th>data de nascimento</th><th>cargo</th><th>ações</th></tr></thead><tbody>';
+        echo '<table><thead><tr><th></th><th>username</th><th>senha</sh><th>nome</th><th>CPF</th><th>data de nascimento</th><th>cargo</th><th>ações</th></tr></thead><tbody>';
         $usuario = new User();
         $usuario->username = 'não e-mail';
         $this->formUser($usuario);
         $usuario = new User();
         $usuario->username = Helper::randomStr(3) . '@email.com';
         $this->formUser($usuario);
+        $usuario = new User();
+        $usuario->username = Helper::randomStr(3) . '@email.com';
+        $usuario->cpf = '12';
+        $this->formUser($usuario);
+        $usuario = new User();
+        $usuario->username = Helper::randomStr(3) . '@email.com';
+        $usuario->cpf = '111.222.333-44';
+        $this->formUser($usuario);
         echo '</tbody></table>';
 
         echo '<h2>Pacientes</h2>';
-        echo '<table><thead><tr><th></th><th>Nome</th><th>Data de Nascimento</th><th>Rua</th><th>Número</th><th>Complemento</th><th>CEP</th><th>Cidade</th><th>Estado</th><th>Ações</th></tr></thead><tbody>';
+        echo '<table><thead><tr><th></th><th>Nome</th><th>CPF</th><th>Data de Nascimento</th><th>Rua</th><th>Número</th><th>Complemento</th><th>CEP</th><th>Cidade</th><th>Estado</th><th>Ações</th></tr></thead><tbody>';
         $paciente = new Paciente();
+        $this->formPaciente($paciente);
+        $paciente = new Paciente();
+        $paciente->cpf = '1122';
+        $this->formPaciente($paciente);
+        $paciente = new Paciente();
+        $paciente->cpf = '111.222.333-44';
         $this->formPaciente($paciente);
         echo '</tbody></table>';
     }

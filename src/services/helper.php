@@ -155,13 +155,43 @@ class Helper {
         }
     }
 
+    private static function validateCpfDigits(string $cpf): bool {
+        $cpf = preg_replace('/[^0-9]/', '', $cpf);
+        /**
+         * Elimina CPFs inválidos conhecidos
+         * \1: Refere-se ao caractere capturado no grupo (.)
+         * número repetidos, como: 111.111.111-11
+         */
+        if (preg_match('/^(.)\1{10}$/', $cpf)) {
+            return false;
+        }
+
+        // Calcula o 1º dígito verificador
+        for ($t = 9; $t < 11; $t++) {
+            $sum = 0;
+            for ($i = 0; $i < $t; $i++) {
+                $sum += $cpf[$i] * (($t + 1) - $i);
+            }
+            $digit = ($sum * 10) % 11;
+            if ($digit == 10) {
+                $digit = 0;
+            }
+
+            if ($cpf[$t] != $digit) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * @param string[] $patterns
      */
     public static function validadeStr(string $value, array $patterns): bool {
         foreach ($patterns as $pattern) {
             if (strcasecmp($pattern, 'cpf') === 0) {
-                if (preg_match('/^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}$/', $value)) return true;
+                if (preg_match('/^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}$/', $value) && self::validateCpfDigits($value)) return true;
             } elseif (strcasecmp($pattern, 'cnpj') === 0) {
                 if (preg_match('/^[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}-?[0-9]{2}$/', $value)) return true;
             } elseif (strcasecmp($pattern, 'phone') === 0) {

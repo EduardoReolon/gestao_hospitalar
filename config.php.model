@@ -1,9 +1,10 @@
 <?php
 
-define('__ENV__', 'dev');
-define('__JWT_SECRET__', 'secret');
+define('__SGBD_DRIVER__', 'mysql');
+define('__SGBD_SERVER__', 'localhost');
+define('__SGBD_DB__', 'gestao_hospitalar');
+define('__SGBD_USER__', 'root');
+define('__SGBD_PASS__', 'senha');
 
-if ( isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '' )
-	define( '__PORT__', ':' . $_SERVER['SERVER_PORT'] );
-else
-	define( '__PORT__', '' );
+define('__ENV__', 'dev');
+define('__JWT_SECRET__', 'senha_forte');

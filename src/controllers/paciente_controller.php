@@ -22,6 +22,7 @@ class Paciente_controller extends Base_controller {
         }
 
         $paciente->nome = $request->nome;
+        $paciente->cpf = $request->cpf;
         $paciente->data_nascimento = $request->data_nascimento;
         $paciente->rua = $request->rua;
         

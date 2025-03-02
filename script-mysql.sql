@@ -94,6 +94,7 @@ DROP TABLE IF EXISTS `paciente`;
 CREATE TABLE `paciente` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
+  `cpf` varchar(15) NOT NULL,
   `data_nascimento` date NOT NULL,
   `rua` varchar(255) NOT NULL,
   `numero` varchar(50) DEFAULT NULL,
@@ -192,6 +193,7 @@ CREATE TABLE `user` (
   `username` varchar(45) NOT NULL,
   `password` varchar(150) DEFAULT NULL,
   `nome` varchar(45) DEFAULT NULL,
+  `cpf` varchar(15) DEFAULT NULL,
   `data_nascimento` date DEFAULT NULL,
   `id_cargo` int DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
@@ -226,4 +228,4 @@ CREATE TABLE `usuario_especialidade` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-01 14:25:53
+-- Dump completed on 2025-03-02  7:31:38
