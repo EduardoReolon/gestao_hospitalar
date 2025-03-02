@@ -75,7 +75,7 @@ Se você estiver usando Nginx ou outro servidor, configure o arquivo de configur
 
 1. Após fazer login, você pode acessar as funcionalidades do sistema, como cadastro de pacientes, profissionais de saúde, e muito mais.
 
-2. Todas as páginas possuem ao final um conjunto de testes já pré configurados, para facilitar a observação dos erros gerados.
+2. Todas as páginas incluem, ao final, um conjunto de testes pré-configurados para facilitar a identificação de erros. Para visualizar as mensagens de erro, basta clicar em "Salvar" em cada linha de teste.
 
 # Estrutura de Pastas
 
