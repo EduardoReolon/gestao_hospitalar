@@ -93,7 +93,7 @@ class Home_view extends View_main {
                         </a>
                     </td>
                     <td>
-                        <input name="nome" class="form-control" type='text' value="<?php echo $paciente->nome ?? ''; ?>"/>
+                        <input placeholder="<?php echo isset($paciente->id) ? '' : 'Novo paciente' ?>" name="nome" class="form-control" type='text' value="<?php echo $paciente->nome ?? ''; ?>"/>
                     </td>
                     <td>
                         <input name="cpf" class="form-control" type='text' value="<?php echo $paciente->cpf ?? ''; ?>"/>

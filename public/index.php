@@ -16,6 +16,12 @@ if (preg_match('/^\/storage/', $uri)) {
     return;
 }
 
+if (preg_match('/^\/api/i', $uri)) {
+    require_once __DIR__ . '/../src/bootstrap.php';
+    apiRequest();
+    return;
+}
+
 function isCurrent(string $option): bool {
     global $uri;
     if (preg_match($option, $uri)) return true;
