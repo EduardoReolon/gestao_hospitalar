@@ -2,7 +2,7 @@
 
 class Property {
     public string $prop_name;
-    public string $prop_name_income;
+    public string $prop_name_income; // for when prop_name is different
     public bool $json = false;
     public bool $allowsNull = true;
     public string $type = 'string';
